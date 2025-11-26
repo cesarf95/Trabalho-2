@@ -1,0 +1,797 @@
+/* ========================================================= */
+/* --- ESTILOS GERAIS E TEXTURA GASTRONÔMICA (BODY/HEADER) --- */
+/* ========================================================= */
+
+/* ========================================================= */
+/* --- ESTILOS GERAIS E TEXTURA GASTRONÔMICA (BODY) --- */
+/* ========================================================= */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', cursive, sans-serif;
+    color: #333;
+    
+    background-color: #4a332a; /* Cor base mais escura */
+    
+    /* APLICAÇÃO DE MÚLTIPLOS BACKGROUNDS (do mais visível para o menos) */
+    background-image: 
+        /* 1. Camada de Receitas Escura (Repetível) */
+        url('papel-de-parede-cozinha-culinaria-comida-kit-02-rolos-a496-adesivo-alimento.webp'), /* ⚠️ SUBSTITUIR PELO LINK DO SEU PADRÃO ESCURO */
+        /* 2. Camada de Vinheta Escura (Não Repetível) */
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%), 
+        /* 3. Textura de Madeira (Base) */
+        url('../assets/texture-madeira-clara.jpg'); 
+        
+    /* Configuração de Repetição e Tamanho */
+    background-repeat: repeat, no-repeat, no-repeat;
+    background-size: 200px auto, cover, cover; /* Padrão 200px, Vinheta/Madeira Cover */
+    background-position: center center, center center, center center;
+    background-attachment: fixed; /* Mantém o fundo fixo ao rolar */
+    
+    /* FILTROS DE ENVELHECIMENTO E MELHORIA DE CONTRASTE */
+    filter: sepia(60%) contrast(120%) saturate(150%) brightness(90%); 
+}
+
+header {
+    text-align: center;
+    background-color: rgba(69, 44, 30, 0.95); 
+    padding: 25px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+    color: #f9e3c9;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 3em;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #f0f0f0;
+    font-size: 1.2em;
+}
+main {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+    
+    /* REMOVER QUALQUER background-image, background-repeat, background-size DAQUI */
+    /* Deixe apenas os estilos de layout (padding, max-width, margin, position, box-shadow, border-radius) */
+    
+    /* SOMBRA MAIS FORTE PARA MAIOR DESTAQUE */
+    box-shadow: 0 0 70px rgba(0, 0, 0, 0.95); 
+    border-radius: 10px; 
+}
+
+/* IMPORTANTE: Remova os filtros dos cards */
+/* Certifique-se de que os cards NÃO herdem os filtros do main ou body */
+.card, .content, .front, .back {
+    filter: none !important; 
+    /* Já existe no seu CSS, mas é crucial garantir que os cards sejam nítidos. */
+}
+
+/* ========================================================= */
+/* --- ESTILOS DO PRELOADER (Loader Container) --- */
+/* ========================================================= */
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fffdf8; 
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+    filter: none; /* Remove o sépia do loader para ele ser branco/colorido */
+}
+
+.loader-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- ANIMAÇÃO DO CAFÉ (mantida) --- */
+.loader {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  animation: shake 3s infinite ease-in-out;
+}
+
+.cup {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 30px;
+  background-color: #5b4022cb;
+  border: 1px solid #2e2e2e;
+  border-radius: 3px 3px 10px 10px;
+  z-index: 1;
+  animation: cupPulse 6s infinite ease-in-out;
+}
+
+.cup::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  width: calc(100% - 2px);
+  height: 6px;
+  background: #5b4022cb;
+  border: 1px solid #2e2e2e;
+  border-top: none;
+  border-radius: 50%;
+  z-index: -1;
+  animation: cupPulse 6s infinite ease-in-out;
+}
+
+.cup::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: 4px;
+  background: #da8920ca;
+  border: 1px solid #2e2e2e;
+  border-radius: 50%;
+  animation: coffeeGlow 6s infinite ease-in-out;
+}
+
+.cup-handle {
+  position: absolute;
+  top: 5px;
+  right: -10px;
+  width: 10px;
+  height: 15px;
+  border: 2px solid #2e2e2e;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  background: transparent;
+}
+
+.smoke {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 10px;
+  height: 25px;
+  background: rgba(72, 67, 67, 0.501);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: rise 3s infinite ease-in-out;
+  filter: blur(8px);
+}
+
+.smoke.one {
+  animation-delay: 0s;
+}
+.smoke.two {
+  animation-delay: 0.8s;
+}
+.smoke.three {
+  animation-delay: 1.6s;
+}
+
+.load {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #2e2e2e;
+  opacity: 0.6;
+}
+
+@keyframes rise {
+  0% {
+    transform: translate(-50%, 0) scale(0.4);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -120px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+  25% {
+    transform: translateX(-4px) translateY(-2px) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+  75% {
+    transform: translateX(4px) translateY(-2px) rotate(2deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+}
+
+@keyframes cupPulse {
+  0%,
+  100% {
+    background-color: #5b4022cb;
+  }
+  50% {
+    background-color: #f5f5f5bd;
+  }
+}
+
+@keyframes coffeeGlow {
+  0%,
+  100% {
+    background: #da8920ca;
+  }
+  50% {
+    background: #fed197d5;
+  }
+}
+
+/* ========================================================= */
+/* --- ESTILO DO BOTÃO DE SAÍDA ANIMADO (FIXO) --- */
+/* ========================================================= */
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  
+  /* POSICIONAMENTO FIXO (CORRIGIDO) */
+  position: fixed; 
+  top: 30px; 
+  right: 20px; 
+  z-index: 1000; 
+  
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(255, 65, 65); /* COR VERMELHA */
+}
+
+/* Ícone */
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: white;
+}
+/* Texto */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* Efeito hover na largura do botão */
+.btn-logout:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+  background-color: rgb(200, 50, 50); /* Vermelho mais escuro no hover */
+}
+
+.btn-logout:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* Efeito hover no texto do botão */
+.btn-logout:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* Efeito click */
+.btn-logout:active {
+  transform: translate(2px ,2px);
+}
+
+
+/* ========================================================= */
+/* --- ESTILOS DO CARD FLIP 3D E MODAL --- */
+/* ========================================================= */
+
+.receitas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.card {
+    overflow: hidden;
+    width: 280px;
+    height: 350px;
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 500ms;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.front, .back {
+    /* Cor e Textura de Papel Antigo */
+    background-color: #fffdf8; 
+    /* CAMINHO CORRETO PARA A IMAGEM DE FUNDO */
+    background-image: url('../assets/texture-papel-amassado.png'); 
+    background-size: cover;
+    background-position: center;
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.back {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    /* ROTAÇÃO INICIAL */
+    transform: rotateY(180deg);
+}
+
+.back::before {
+    position: absolute;
+    content: ' ';
+    display: block;
+    width: 160px;
+    height: 160%;
+    background: linear-gradient(90deg, transparent, #d6a77a, #f9e3c9, #d6a77a, transparent);
+    animation: rotation_481 5000ms infinite linear;
+}
+
+.back-content {
+    position: absolute;
+    width: 99%;
+    height: 99%;
+    padding: 20px; 
+    box-sizing: border-box; 
+    
+    background-color: rgba(255, 253, 248, 0.95); 
+    border-radius: 10px;
+    color: #5d3f2c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2em;
+    text-align: center; 
+    /* Remove o filtro sépia apenas do conteúdo do card */
+    filter: none; 
+}
+
+.back-content strong {
+    font-size: 1.5em;
+    color: #a05a2c;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); 
+}
+
+.back-content small {
+    color: #5d3f2c;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.card:hover .content {
+    /* ROTAÇÃO AO HOVER */
+    transform: rotateY(180deg);
+}
+
+@keyframes rotation_481 {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.front {
+    /* ROTAÇÃO INICIAL */
+    transform: rotateY(0deg); 
+    color: white;
+}
+
+/* --- AJUSTE DA IMAGEM: ALTURA DE 70% --- */
+.front .img {
+    position: absolute;
+    width: 100%;
+    height: 70%; /* A imagem ocupa 70% do card */
+    background-size: cover;
+    background-position: center;
+    
+    border: 5px solid #fffdf8;
+    box-sizing: border-box; 
+    /* Remove o filtro sépia da imagem frontal do card */
+    filter: none; 
+}
+/* --- FIM DO AJUSTE DA IMAGEM --- */
+
+/* --- AJUSTE DO CONTEÚDO INFERIOR: ALTURA DE 30% E BOTTOM: 0 --- */
+.front .front-content {
+    position: absolute;
+    width: 100%;
+    height: 30%; /* Ocupa os 30% restantes */
+    bottom: 0; /* Colado na parte inferior */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    box-sizing: border-box; 
+    /* Remove o filtro sépia da imagem frontal do card */
+    filter: none; 
+}
+/* --- FIM DO AJUSTE DO CONTEÚDO INFERIOR --- */
+
+
+.front-content .badge {
+    background-color: #a05a2c; 
+    padding: 4px 12px;
+    border-radius: 15px;
+    backdrop-filter: blur(2px);
+    width: fit-content;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+/* --- AJUSTE DO TÍTULO E TEMPO --- */
+.description {
+    box-shadow: 0px 0px 10px 5px #00000088;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+.title {
+    font-size: 14px;
+    width: 100%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: nowrap;
+}
+
+.title strong {
+    font-size: 1.2em;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: calc(100% - 60px); 
+}
+
+.title p {
+    margin: 0;
+    white-space: nowrap; 
+}
+
+/* --- AJUSTE DO RODAPÉ (FOOTER) --- */
+.card-footer {
+    color: #ffffffaa;
+    margin-top: 10px; 
+    font-size: 11px; 
+    text-align: center; /* CENTRALIZAÇÃO DO TEXTO */
+    width: 100%; 
+    padding: 0 5px; 
+    box-sizing: border-box; 
+    line-height: 1.3; 
+}
+/* --- FIM DO AJUSTE DO RODAPÉ --- */
+
+
+/* Círculos de Brilho/Efeito */
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #d6a77a;
+    position: relative;
+    filter: blur(20px);
+    opacity: 0.7;
+    animation: floating 3000ms infinite linear;
+}
+
+#bottom {
+    background-color: #a05a2c;
+    left: 80px;
+    top: 50px;
+    width: 180px;
+    height: 180px;
+    animation-delay: -1000ms;
+}
+
+#right {
+    background-color: #e5944a;
+    left: 200px;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    animation-delay: -2000ms;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(15px) rotate(5deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+/* Estilos do botão surpresa e modal... */
+
+.btn-surpresa {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 25px;
+    background-color: #f3b27a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #5d3f2c; 
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-surpresa:hover {
+    background-color: #e5944a;
+    color: #fff;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-conteudo {
+    background-color: #fffdf8;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 450px; 
+    border: 3px solid #d6a77a; 
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    position: relative;
+    font-family: Georgia, serif; 
+    filter: none; /* Remove o filtro sépia do modal para ele ser claro */
+}
+
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8em;
+    color: #a05a2c;
+    cursor: pointer;
+}
+
+.modal h2 {
+    color: #a05a2c;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    font-family: 'Times New Roman', serif;
+}
+.modal h4 {
+    color: #5d3f2c;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-family: 'Times New Roman', serif;
+}
+
+.modal ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    line-height: 1.6; 
+}
+.modal p {
+    color: #333;
+    padding: 0;
+    line-height: 1.5; 
+    font-family: Georgia, serif; 
+}
+
+/* Botão de Fechar Detalhes Dentro do Modal */
+.btn-voltar {
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+    padding: 10px;
+    background-color: #a05a2c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.btn-voltar:hover {
+    background-color: #5d3f2c;
+}
+/* ... (Seus estilos existentes) ... */
+
+/* ========================================================= */
+/* --- ESTILOS ADICIONAIS DO LIQUID LOADER (LOGOUT) --- */
+/* ========================================================= */
+
+/* Garante que o container de logout tenha o fundo preto para contraste */
+#logout-loader {
+    background-color: #1a1a1a;
+}
+
+/* From Uiverse.io by ShaikhWahid99 - Estilos do Liquid Loader */ 
+.liquid-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; 
+    padding: 20px;
+    font-family: system-ui, sans-serif;
+    background-color: transparent;
+}
+
+.loader-track {
+    position: relative;
+    width: 250px; 
+    height: 35px;
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.6),
+        0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-fill {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: calc(100% - 4px);
+    background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
+    border-radius: 16px;
+    animation:
+        fillProgress 4s ease-out infinite,
+        colorShift 3s linear infinite;
+    box-shadow:
+        0 0 12px rgba(124, 58, 237, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.loading-text {
+    color: #f9e3c9; 
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    animation: textGlow 1s ease-in-out infinite;
+}
+
+.dot {
+    margin-left: 3px;
+    animation: blink 1.5s infinite;
+}
+.dot:nth-of-type(1) {
+    animation-delay: 0s;
+}
+.dot:nth-of-type(2) {
+    animation-delay: 0.3s;
+}
+.dot:nth-of-type(3) {
+    animation-delay: 0.6s;
+}
+
+/* ANIMAÇÕES GLOBAIS - GARANTINDO QUE FUNCIONEM */
+@keyframes fillProgress {
+    0% { width: 4px; }
+    25% { width: 25%; }
+    50% { width: 50%; }
+    75% { width: 75%; }
+    100% { width: calc(100% - 4px); }
+}
+
+@keyframes colorShift {
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    33% { filter: hue-rotate(120deg) brightness(1.1); }
+    66% { filter: hue-rotate(240deg) brightness(0.9); }
+    100% { filter: hue-rotate(360deg) brightness(1); }
+}
+
+@keyframes textGlow {
+    0%, 100% {
+        opacity: 0.7;
+        text-shadow: 0 0 8px rgba(210, 180, 140, 0.5); 
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 16px rgba(210, 180, 140, 0.8); 
+    }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+/* ========================================================= */
+/* --- ESTILOS DO RODAPÉ (FOOTER) --- */
+/* ========================================================= */
+
+footer {
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 50px;
+    /* Cores que combinam com o tema 'Sabor da Casa' */
+    color: #f9e3c9; 
+    background-color: rgba(69, 44, 30, 0.95); 
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
+    font-size: 0.9em;
+    font-weight: 500;
+}

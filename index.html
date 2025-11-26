@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor da Casa: Livro de Receitas</title>
+    
+    <link rel="stylesheet" href="style/style.css"> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <div id="loader-overlay" class="loader-container">
+        <div class="loader">
+            <div class="cup">
+                <div class="cup-handle"></div>
+                <div class="smoke one"></div>
+                <div class="smoke two"></div>
+                <div class="smoke three"></div>
+            </div>
+            <div class="load">Carregando Receitas...</div>
+        </div>
+    </div>
+
+    <div id="logout-loader" class="loader-container loader-hidden">
+        <div class="liquid-loader">
+            <div class="loading-text">
+                Saindo<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+            </div>
+
+            <div class="loader-track">
+                <div class="liquid-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-logout" onclick="fazerLogout()">
+        <div class="sign">
+            <svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg>
+        </div>
+        <div class="text">Logout</div>
+    </button>
+    
+    <header>
+        <h1>Sabor da Casa</h1>
+        <p>Receitas caseiras que aquecem a alma.</p>
+    </header>
+
+    <main>
+        <section class="receitas">
+            <div class="card" onclick="abrirModal(0)">
+                 <div class="content">
+                    <div class="back">
+                        <div class="back-content">
+                            <i class="fas fa-carrot" style="font-size: 2em; color: #e5944a;"></i>
+                            <strong>Bolo de Cenoura</strong>
+                            <small>Clique para ver o preparo</small>
+                            <div class="circle"></div>
+                            <div class="circle" id="right"></div>
+                        </div>
+                    </div>
+                    <div class="front">
+                        <div class="img" style="background-image: url('assets/Bolo-de-cenoura-S.webp');"></div>
+                        <div class="front-content">
+                            <span class="badge">Doce</span>
+                            <div class="description">
+                                <div class="title">
+                                    <strong>Bolo de Cenoura</strong>
+                                    <p>40 min</p>
+                                </div>
+                                <div class="card-footer">
+                                    Simples e tradicional.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="abrirModal(1)">
+                <div class="content">
+                    <div class="back">
+                        <div class="back-content">
+                            <i class="fas fa-cheese" style="font-size: 2em; color: #f3b27a;"></i>
+                            <strong>Lasanha da Vovó</strong>
+                            <small>Clique para ver o preparo</small>
+                            <div class="circle"></div>
+                            <div class="circle" id="bottom"></div>
+                        </div>
+                    </div>
+                     <div class="front">
+                        <div class="img" style="background-image: url('assets/Lasanha frango e carne.jpg');"></div>
+                        <div class="front-content">
+                            <span class="badge">Salgado</span>
+                            <div class="description">
+                                <div class="title">
+                                    <strong>Lasanha da Vovó</strong>
+                                    <p>60 min</p>
+                                </div>
+                                <div class="card-footer">
+                                    O prato preferido da família.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal(2)">
+                <div class="content">
+                    <div class="back">
+                        <div class="back-content">
+                            <i class="fas fa-apple-alt" style="font-size: 2em; color: #a05a2c;"></i>
+                            <strong>Torta de Maçã</strong>
+                            <small>Clique para ver o preparo</small>
+                            <div class="circle" id="bottom"></div>
+                            <div class="circle" id="right"></div>
+                        </div>
+                    </div>
+                    <div class="front">
+                        <div class="img" style="background-image: url(assets/Torta\ de\ maça.jpg);"></div>
+                        <div class="front-content">
+                            <span class="badge">Doce</span>
+                            <div class="description">
+                                <div class="title">
+                                    <strong>Torta de Maçã</strong>
+                                    <p>30 min</p>
+                                </div>
+                                <div class="card-footer">
+                                    Crocante e quentinha.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <button class="btn-surpresa" onclick="modoSurpresa()">Receita Surpresa!</button>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-conteudo">
+            <span class="fechar" onclick="fecharModal()">&times;</span>
+            <h2 id="tituloReceita"></h2>
+            
+            <h4>Ingredientes:</h4>
+            <ul id="ingredientes"></ul>
+
+            <h4>Modo de Preparo:</h4>
+            <p id="preparo"></p>
+            
+            <button class="btn-voltar" onclick="fecharModal()">Voltar</button>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+    
+    <footer style="text-align: center; padding: 15px; margin-top: 50px; color: #fff; background-color: rgba(0, 0, 0, 0.4);">
+        Developed By César TD013 Senai -2025
+    </footer>
+
+</body>
+</html>
